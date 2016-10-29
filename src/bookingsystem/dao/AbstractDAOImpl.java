@@ -31,14 +31,12 @@ public class AbstractDAOImpl<T extends BaseEntity> implements AbstractDAO<T> {
 
     @Override
     public void deleteAll(List<T> list) {
-        for(T o : list)
-            delete(o);
+        list.forEach(o -> delete(o));
     }
 
     @Override
     public void saveAll(List<T> list) {
-        for(T o : list)
-            save(o);
+        list.forEach(o -> save(o));
     }
 
     @Override
