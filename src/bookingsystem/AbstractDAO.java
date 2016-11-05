@@ -1,8 +1,9 @@
-package bookingsystem.dao;
+package bookingsystem;
 
 import java.util.List;
 
 public interface AbstractDAO <T> {
+
     T save(T o);
 
     void delete(T o);
@@ -11,10 +12,10 @@ public interface AbstractDAO <T> {
 
     void saveAll(List<T> o);
 
-    List<T> getList();
+    List<T> getAlll();
 
     void deleteById(long id);
 
-    T findById(long id);
+    T findById(int id);
 }
 
