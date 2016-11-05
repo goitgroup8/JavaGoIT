@@ -81,7 +81,7 @@ public class User implements BaseEntity{
     public void setCity(String city) {
         this.city = city;
     }
-
+    @Override
     public long getId() {
 
         return id;
@@ -106,7 +106,7 @@ public class User implements BaseEntity{
 
         User user = (User) o;
 
-        return getCity().equals(user.getCity());
+        return getId() == user.getId();
 
     }
 

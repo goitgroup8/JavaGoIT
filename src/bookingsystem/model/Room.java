@@ -17,7 +17,7 @@ public class Room implements BaseEntity{
         this.hotelName = hotelName;
         this.cityName = cityName;
     }
-
+    @Override
     public long getId() {
         return id;
     }
@@ -73,9 +73,7 @@ public class Room implements BaseEntity{
 
         Room room = (Room) o;
 
-        if (getPrice() != room.getPrice()) return false;
-        if (getPersons() != room.getPersons()) return false;
-        return getHotelName().equals(room.getHotelName()) && getCityName().equals(room.getCityName());
+        return getId() == room.getId();
 
     }
 

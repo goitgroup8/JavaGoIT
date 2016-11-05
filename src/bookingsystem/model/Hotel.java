@@ -28,6 +28,7 @@ public class Hotel implements BaseEntity {
 
     }
 
+    @Override
     public long getId() {
         return id;
     }
