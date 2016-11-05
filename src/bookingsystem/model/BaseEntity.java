@@ -1,5 +1,5 @@
 package bookingsystem.model;
 
-public abstract class BaseEntity {
+public interface BaseEntity {
     public abstract long getId();
 }

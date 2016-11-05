@@ -1,70 +1,51 @@
 package bookingsystem.dao;
 
+import bookingsystem.dao.AbstractDAO;
+import bookingsystem.model.BaseEntity;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-
-import bookingsystem.model.*;
 
 public class AbstractDAOImpl<T extends BaseEntity> implements AbstractDAO<T> {
-    private List<T> objectList;
 
-    public AbstractDAOImpl() {
-        this.objectList = new ArrayList<T>();
-    }
-
+    List<T> list = new ArrayList<T>();
     @Override
     public T save(T o) {
-        if (!objectList.contains(o))
-            objectList.add(o);
-        else
-            objectList.set(objectList.indexOf(o),o);
-
+        this.list.add(o);
         return o;
     }
 
     @Override
     public void delete(T o) {
-        objectList.removeIf(o2 -> o2.equals(o));
+        this.list.remove(o);
     }
 
     @Override
-    public void deleteAll(List<T> list) {
-        list.forEach(o -> delete(o));
+    public void deleteAll(List<T> o) {
+        this.list.removeAll(o);
     }
 
     @Override
-    public void saveAll(List<T> list) {
-        list.forEach(o -> save(o));
+    public void saveAll(List<T> o) {
+        this.list.addAll(o);
+    }
+
+    @Override
+    public List<T> getAlll() {
+        return this.list;
     }
 
     @Override
     public void deleteById(long id) {
-        objectList.removeIf(o2 -> o2.getId() == id);
+        list.remove(id);
     }
 
     @Override
-    public T findById(long id) {
-        Optional<T> res = objectList.stream()
-                .filter(o -> o.getId() == id)
-                .findFirst();
-        if (res.isPresent()) {
-            return res.get();
+    public T findById(int id) {
+        for (T item : list) {
+            if (item.getId() == id)
+                return item;
         }
-        else
-            return null;
-    }
-
-    @Override
-    public List<T> getList() {
-        return objectList;
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractDAOImpl{" +
-                "objectList=" + objectList +
-                '}';
+        return null;
     }
 }
