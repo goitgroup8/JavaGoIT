@@ -1,4 +1,4 @@
-package bookingsystem;
+package bookingsystem.dao;
 
 import java.util.List;
 

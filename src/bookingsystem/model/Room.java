@@ -1,8 +1,8 @@
-package bookingsystem;
+package bookingsystem.model;
 
-import java.util.Date;
+import sun.misc.BASE64Decoder;
 
-public class Room {
+public class Room implements BaseEntity{
     private long id;
     private int price;
     private int persons;

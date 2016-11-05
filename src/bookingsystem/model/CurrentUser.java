@@ -1,4 +1,4 @@
-package bookingsystem;
+package bookingsystem.model;
 
 public class CurrentUser {
     User user;

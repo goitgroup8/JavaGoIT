@@ -1,16 +1,19 @@
-package bookingsystem;
+package bookingsystem.model;
+
+import bookingsystem.dao.AbstractDAO;
+import bookingsystem.dao.HotelDAOImpl;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class Controller {
 
-    AbstractDAO hotelDAO = new HotelDAO();
-    AbstractDAO userDAO = new UserDAO();
+    AbstractDAO hotelDAO = new HotelDAOImpl();
 
 
-    List<Hotel> findHotelByName(String name) {
+    public List<Hotel> findHotelByName(String name) {
         // check User for regist
 
         List<Hotel> result = new ArrayList<>();
@@ -21,7 +24,7 @@ public class Controller {
         return result;
     }
 
-    List<Hotel> findHotelByCity(String city) {
+    public List<Hotel> findHotelByCity(String city) {
         // check User for regist
         List<Hotel> result = new ArrayList<>();
         List<Hotel> temp = hotelDAO.getAlll();

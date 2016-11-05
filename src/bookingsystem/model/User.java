@@ -1,41 +1,14 @@
-package bookingsystem;
+package bookingsystem.model;
 
 import java.util.Date;
 
-public class User {
+public class User implements BaseEntity{
     private long id;
     private String firstName;
     private String lastName;
-    private String password;
     private String city;
-    private int age;
-    private Date birthDate;
 
     private boolean isActive;
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
 
     public boolean isActive() {
         return isActive;
