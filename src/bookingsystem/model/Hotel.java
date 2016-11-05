@@ -2,7 +2,7 @@ package bookingsystem.model;
 
 import java.util.List;
 
-public class Hotel implements BaseEntity {
+public class Hotel extends BaseEntity {
     private long id;
     private String name;
     private String city;

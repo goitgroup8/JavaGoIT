@@ -2,7 +2,7 @@ package bookingsystem.model;
 
 import sun.misc.BASE64Decoder;
 
-public class Room implements BaseEntity{
+public class Room extends BaseEntity{
     private long id;
     private int price;
     private int persons;
