@@ -3,6 +3,7 @@ package bookingsystem.model;
 import bookingsystem.dao.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class Controller {
 
 
     public List<Hotel> findHotelByName(String name) {
-        List result =null;
+        List result;
         result = hotelDAO.getAll().stream()
                 .filter(n -> name.equals(n.getName()))
                 .collect(Collectors.toList());
@@ -50,7 +51,12 @@ public class Controller {
     }
 
     public List<Hotel> findHotelByCity(String city) {
-        List result = null;
+        List result;
+        userDAO.getList().forEach(System.out::println);
+        if ((curUser.getCurUser() == null) || (userDAO.getList().contains(curUser.getCurUser()))) {
+            System.out.println("User not found");
+            return new ArrayList<>();
+        }
         result = hotelDAO.getAll().stream()
                 .filter(n -> city.equals(n.getCity()))
                 .collect(Collectors.toList());
