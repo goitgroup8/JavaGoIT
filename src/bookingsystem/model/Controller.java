@@ -40,19 +40,22 @@ public class Controller {
 
 
     public List<Hotel> findHotelByName(String name) {
-        List result;
-        result =hotelDAO.getAll().stream()
+        List result =null;
+        result = hotelDAO.getAll().stream()
                 .filter(n -> name.equals(n.getName()))
                 .collect(Collectors.toList());
+        if (result.size() == 0)
+            System.out.println("Your search - " + name + " - did not match any hotels.");
         return result;
     }
 
     public List<Hotel> findHotelByCity(String city) {
-        List result;
+        List result = null;
         result = hotelDAO.getAll().stream()
                 .filter(n -> city.equals(n.getCity()))
                 .collect(Collectors.toList());
-
+        if (result.size() == 0)
+            System.out.println("Your search - " + city + " - did not match any hotels.");
         return result;
     }
 

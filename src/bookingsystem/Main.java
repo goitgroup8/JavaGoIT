@@ -20,9 +20,9 @@ public class Main {
         controller.registerUser(user2);
 
         controller.curUser.setCurUser(user);
-        controller.findHotelByCity("Kiev").forEach(System.out::println);
+        controller.findHotelByCity("Kiev1").forEach(System.out::println);
         System.out.println();
-        controller.findHotelByName("Hotel2").forEach(System.out::println);
+        controller.findHotelByName("Hotel21").forEach(System.out::println);
 
         controller.bookRoom(1,1,1);
     }
