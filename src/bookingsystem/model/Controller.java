@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class Controller {
 
-    private static AbstractDAO hotelDAO = new HotelDAOImpl(new RoomDAOImpl());
+    private static HotelDAOImpl hotelDAO = new HotelDAOImpl(new RoomDAOImpl());
     private static AbstractDAO userDAO = new UserDAOImpl();
     public static CurUser curUser = new CurUser();
 
@@ -41,16 +41,16 @@ public class Controller {
 
     public List<Hotel> findHotelByName(String name) {
         List result;
-        result =hotelDAO.getList().stream()
-                .filter(n -> name.equals(n.getName))
+        result =hotelDAO.getAll().stream()
+                .filter(n -> name.equals(n.getName()))
                 .collect(Collectors.toList());
         return result;
     }
 
     public List<Hotel> findHotelByCity(String city) {
         List result;
-        result = hotelDAO.getList().stream()
-                .filter(n -> city.equals(n.getCity))
+        result = hotelDAO.getAll().stream()
+                .filter(n -> city.equals(n.getCity()))
                 .collect(Collectors.toList());
 
         return result;
@@ -103,20 +103,19 @@ public class Controller {
         List<Room> findRoom = new ArrayList<>();
 
         for (Map.Entry<String, String> entry : params.entrySet()) {
-            String fieldName = entry.getKey();
-            String fieldValue = entry.getValue();
-            switch (fieldName) {
+            String parametr1 = entry.getKey();
+            String parametr2 = entry.getValue();
+            switch (parametr1) {
                 case "price":
 
-                    findRoom.addAll(hotelDAO.getList().stream()
-                            .filter(r -> r.getPrice() == Integer.valueOf(fieldValue))
-                            .collect(Collectors.toList()));
-
+/*                    findRoom.addAll(hotelDAO.getAll().stream()
+                            .filter()
+                            .collect(Collectors.toList()));*/
                     break;
 
 
                 default:
-                    System.out.println("Parameter \'" + fieldName + "\' given to method FindRoom() is wrong. Interrupted");
+                    System.out.println("Error");
             }
         }
         return null;
