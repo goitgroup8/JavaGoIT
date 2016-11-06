@@ -19,19 +19,40 @@ public class Controller {
         List<Room> roomsHotel1 = new ArrayList<Room>();
         roomsHotel1.add(new Room(1, 100, 4, "Hotel1", "Kiev", null));
         roomsHotel1.add(new Room(2, 100, 2, "Hotel1", "Kiev", null));
-        roomsHotel1.add(new Room(3, 500, 3, "Hotel1", "Kiev", null));
+        roomsHotel1.add(new Room(3, 1500, 3, "Hotel1", "Kiev", null));
+        roomsHotel1.add(new Room(4, 500, 2, "Hotel1", "Kiev", null));
+        roomsHotel1.add(new Room(5, 2500, 3, "Hotel1", "Kiev", null));
+        roomsHotel1.add(new Room(6, 1500, 4, "Hotel1", "Kiev", null));
+        roomsHotel1.add(new Room(7, 2500, 3, "Hotel1", "Kiev", null));
+        roomsHotel1.add(new Room(8, 4500, 5, "Hotel1", "Kiev", null));
+        roomsHotel1.add(new Room(9, 500, 3, "Hotel1", "Kiev", null));
+        roomsHotel1.add(new Room(10, 300, 2, "Hotel1", "Kiev", null));
         hotelDAO.saveHotel(new Hotel(1, "Hotel1", "Kiev", 1, roomsHotel1));
 
         List<Room> roomsHotel2 = new ArrayList<>();
-        roomsHotel2.add(new Room(4, 100, 4, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(5, 400, 2, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(6, 500, 3, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(1, 100, 4, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(2, 400, 2, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(3, 200, 1, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(4, 1500, 3, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(5, 2500, 2, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(6, 3200, 3, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(7, 4500, 5, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(8, 1500, 4, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(9, 700, 4, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(10, 300, 3, "Hotel2", "London", null));
         hotelDAO.saveHotel(new Hotel(2, "Hotel2", "London", 13, roomsHotel2));
 
         List<Room> roomsHotel3 = new ArrayList<Room>();
-        roomsHotel3.add(new Room(7, 100, 4, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(8, 400, 2, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(9, 500, 3, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(1, 100, 4, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(2, 400, 2, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(3, 700, 3, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(4, 1500, 5, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(5, 500, 3, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(6, 200, 2, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(7, 1500, 5, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(8, 2500, 5, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(9, 300, 1, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(10, 500, 3, "Hotel3", "Kiev", null));
         hotelDAO.saveHotel(new Hotel(3, "Hotel3", "Kiev", 13, roomsHotel3));
     }
 
@@ -151,11 +172,10 @@ public class Controller {
         for (Map.Entry<String, String> entry : params.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            if (foundRooms.isEmpty() && isFirst){
+            if (isFirst) {
                 foundRooms = filterRoomList(roomDAO.getAll(), key, value);
-            isFirst = false;
-        }
-            else
+                isFirst = false;
+            } else
                 foundRooms = filterRoomList(foundRooms, key, value);
         }
 
