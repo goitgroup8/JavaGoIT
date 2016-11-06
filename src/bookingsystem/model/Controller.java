@@ -7,40 +7,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
 public class Controller {
 
     private static HotelDAOImpl hotelDAO = new HotelDAOImpl(new RoomDAOImpl());
-    private static UserDAO userDAO = new UserDAOImpl();
+    private static UserDAOImpl userDAO = new UserDAOImpl();
     public static CurUser curUser = new CurUser();
 
     static {
-        List roomsHotel1 = new ArrayList();
+        List<Room> roomsHotel1 = new ArrayList<Room>();
         roomsHotel1.add(new Room(1, 100, 4, "Hotel1", "Kiev", null));
         roomsHotel1.add(new Room(2, 400, 2, "Hotel1", "Kiev", null));
         roomsHotel1.add(new Room(3, 500, 3, "Hotel1", "Kiev", null));
+        hotelDAO.saveHotel(new Hotel(1, "Hotel1", "Kiev", 1, roomsHotel1));
 
-        hotelDAO.save(new Hotel(1, "Hotel1", "Kiev", 1, roomsHotel1));
-
-        List roomsHotel2 = new ArrayList();
+        List<Room> roomsHotel2 = new ArrayList<>();
         roomsHotel2.add(new Room(1, 100, 4, "Hotel2", "London", null));
         roomsHotel2.add(new Room(2, 400, 2, "Hotel2", "London", null));
         roomsHotel2.add(new Room(3, 500, 3, "Hotel2", "London", null));
+        hotelDAO.saveHotel(new Hotel(2, "Hotel2", "London", 13, roomsHotel2));
 
-        hotelDAO.save(new Hotel(2, "Hotel2", "London", 13, roomsHotel2));
-
-        List roomsHotel3 = new ArrayList();
+        List<Room> roomsHotel3 = new ArrayList<Room>();
         roomsHotel3.add(new Room(1, 100, 4, "Hotel3", "Kiev", null));
         roomsHotel3.add(new Room(2, 400, 2, "Hotel3", "Kiev", null));
         roomsHotel3.add(new Room(3, 500, 3, "Hotel3", "Kiev", null));
-
-        hotelDAO.save(new Hotel(3, "Hotel3", "Kiev", 13, roomsHotel3));
-
+        hotelDAO.saveHotel(new Hotel(3, "Hotel3", "Kiev", 13, roomsHotel3));
     }
 
-
     public List<Hotel> findHotelByName(String name) {
-        List result;
+        List<Hotel> result;
         if (curUser.getCurUser() == null) {
             System.out.println("User not found");
             return new ArrayList<>();
@@ -54,7 +48,7 @@ public class Controller {
     }
 
     public List<Hotel> findHotelByCity(String city) {
-        List result;
+        List<Hotel> result;
         if (curUser.getCurUser() == null) {
             System.out.println("User not found");
             return new ArrayList<>();
@@ -107,7 +101,6 @@ public class Controller {
                 }
             }
         }
-
     }
 
     public ArrayList<Room> findRoom(Map<String, String> params) {
@@ -123,15 +116,12 @@ public class Controller {
                             .filter()
                             .collect(Collectors.toList()));*/
                     break;
-
-
                 default:
                     System.out.println("Error");
             }
         }
         return null;
     }
-
 
     public void registerUser(User user) {
         userDAO.saveUser(user);

@@ -1,7 +1,5 @@
 package bookingsystem.model;
 
-import java.util.Date;
-
 public class User extends BaseEntity{
     private long id;
     private String firstName;
