@@ -59,6 +59,6 @@ public class User extends BaseEntity{
 
     @Override
     public long getId() {
-        return 0;
+        return id;
     }
 }
