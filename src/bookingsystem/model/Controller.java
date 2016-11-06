@@ -35,7 +35,7 @@ public class Controller {
 
     public List<Hotel> findHotelByName(String name) {
         List<Hotel> result;
-        if (curUser.getCurUser() == null) {
+        if ((curUser.getCurUser() == null) || (!userDAO.getAll().contains(curUser.getCurUser()))) {
             System.out.println("User not found");
             return new ArrayList<>();
         }
@@ -49,7 +49,7 @@ public class Controller {
 
     public List<Hotel> findHotelByCity(String city) {
         List<Hotel> result;
-        if (curUser.getCurUser() == null) {
+        if ((curUser.getCurUser() == null) || (!userDAO.getAll().contains(curUser.getCurUser()))) {
             System.out.println("User not found");
             return new ArrayList<>();
         }
