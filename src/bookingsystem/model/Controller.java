@@ -12,7 +12,7 @@ public class Controller {
 
     private static RoomDAOImpl roomDAO = new RoomDAOImpl();
     private static HotelDAOImpl hotelDAO = new HotelDAOImpl(roomDAO);
-    private static AbstractDAO userDAO = new UserDAOImpl();
+    private static UserDAOImpl userDAO = new UserDAOImpl();
     public static CurUser curUser = new CurUser();
 
     static {
@@ -23,15 +23,15 @@ public class Controller {
         hotelDAO.saveHotel(new Hotel(1, "Hotel1", "Kiev", 1, roomsHotel1));
 
         List<Room> roomsHotel2 = new ArrayList<>();
-        roomsHotel2.add(new Room(1, 100, 4, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(2, 400, 2, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(3, 500, 3, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(4, 100, 4, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(5, 400, 2, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(6, 500, 3, "Hotel2", "London", null));
         hotelDAO.saveHotel(new Hotel(2, "Hotel2", "London", 13, roomsHotel2));
 
         List<Room> roomsHotel3 = new ArrayList<Room>();
-        roomsHotel3.add(new Room(1, 100, 4, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(2, 400, 2, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(3, 500, 3, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(7, 100, 4, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(8, 400, 2, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(9, 500, 3, "Hotel3", "Kiev", null));
         hotelDAO.saveHotel(new Hotel(3, "Hotel3", "Kiev", 13, roomsHotel3));
     }
 

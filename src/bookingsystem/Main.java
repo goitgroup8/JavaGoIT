@@ -30,7 +30,7 @@ public class Main {
         controller.findHotelByName("Hotel21").forEach(System.out::println);
 
         Map<String, String> params = new HashMap<>();
-        params.put("hotel","hotel1");
+        params.put("hotel","hotel2");
         params.put("price","100");
         List<Room> foundRooms = controller.findRoom(params);
 
