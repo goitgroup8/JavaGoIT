@@ -87,20 +87,24 @@ public class Controller {
     public void bookRoom(long roomId, long userId, long hotelId) {
         Hotel foundHotel = hotelDAO.findById(hotelId);
         User foundUser = userDAO.findUserById(userId);
-        Room foundRoom;
+        Room foundRoom = null;
         if (foundHotel != null) {
-            foundRoom = foundHotel.getRooms().get((int) roomId);
+            try {
+                foundRoom = foundHotel.getRooms().get((int) roomId);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Your search room id - " + roomId + " -  did not match any rooms");
+            }
             if (foundRoom != null) {
                 if (foundRoom.getUserReserved() == null) {
                     if (foundUser != null) {
                         foundRoom.setUserReserved(foundUser);
                         System.out.println("Booking successful");
+                    } else {
+                        System.out.println("Your search user id - " + userId + " -  did not match any users");
                     }
                 } else {
                     System.out.println("Room was booking");
                 }
-            } else {
-                System.out.println("Your search room id - " + roomId + " -  did not match any rooms");
             }
         } else {
             System.out.println("Your search hotel id - " + hotelId + " -  did not match any hotels");
@@ -110,20 +114,24 @@ public class Controller {
     public void cancelReservation(long roomId, long userId, long hotelId) {
         Hotel foundHotel = hotelDAO.findById(hotelId);
         User foundUser = userDAO.findUserById(userId);
-        Room foundRoom;
+        Room foundRoom = null;
         if (foundHotel != null) {
-            foundRoom = foundHotel.getRooms().get((int) roomId);
+            try {
+                foundRoom = foundHotel.getRooms().get((int) roomId);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Your search room id - " + roomId + " -  did not match any rooms");
+            }
             if (foundRoom != null) {
                 if (foundRoom.getUserReserved() == foundUser) {
                     if (foundUser != null) {
                         foundRoom.setUserReserved(null);
                         System.out.println("Cancel reservation successful");
+                    } else {
+                        System.out.println("Your search user id - " + userId + " -  did not match any users");
                     }
                 } else {
                     System.out.println("User can't cansel reservation");
                 }
-            } else {
-                System.out.println("Your search room id - " + roomId + " -  did not match any rooms");
             }
         } else {
             System.out.println("Your search hotel id - " + hotelId + " -  did not match any hotels");
