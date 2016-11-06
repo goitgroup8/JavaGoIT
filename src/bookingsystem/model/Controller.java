@@ -160,7 +160,8 @@ public class Controller {
                         .collect(Collectors.toList());
                 break;
             default:
-                System.out.println("Error");
+                System.out.println("Your client has issued a malformed or illegal request. - " + key + "\nSuggestions: \n- Make sure that all words are spelled correctly.\n" +
+                        "- Try different keywords.\nExample: price, hotel, persons, city.");
         }
 
         return result;
