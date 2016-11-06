@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
 public class Controller {
 
-    private static HotelDAOImpl hotelDAO = new HotelDAOImpl(new RoomDAOImpl());
+    private static RoomDAOImpl roomDAO = new RoomDAOImpl();
+    private static HotelDAOImpl hotelDAO = new HotelDAOImpl(roomDAO);
     private static UserDAOImpl userDAO = new UserDAOImpl();
     public static CurUser curUser = new CurUser();
 
@@ -21,15 +23,15 @@ public class Controller {
         hotelDAO.saveHotel(new Hotel(1, "Hotel1", "Kiev", 1, roomsHotel1));
 
         List<Room> roomsHotel2 = new ArrayList<>();
-        roomsHotel2.add(new Room(1, 100, 4, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(2, 400, 2, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(3, 500, 3, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(4, 100, 4, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(5, 400, 2, "Hotel2", "London", null));
+        roomsHotel2.add(new Room(6, 500, 3, "Hotel2", "London", null));
         hotelDAO.saveHotel(new Hotel(2, "Hotel2", "London", 13, roomsHotel2));
 
         List<Room> roomsHotel3 = new ArrayList<Room>();
-        roomsHotel3.add(new Room(1, 100, 4, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(2, 400, 2, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(3, 500, 3, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(7, 100, 4, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(8, 400, 2, "Hotel3", "Kiev", null));
+        roomsHotel3.add(new Room(9, 500, 3, "Hotel3", "Kiev", null));
         hotelDAO.saveHotel(new Hotel(3, "Hotel3", "Kiev", 13, roomsHotel3));
     }
 
@@ -113,24 +115,49 @@ public class Controller {
         }
     }
 
-    public ArrayList<Room> findRoom(Map<String, String> params) {
-        List<Room> findRoom = new ArrayList<>();
+    private List<Room> filterRoomList(List<Room> roomList, String key, String value) {
+        List<Room> result = roomList;
+        switch (key) {
+            case "price":
+                result = roomList.stream()
+                        .filter(r -> Integer.parseInt(value) == r.getPrice())
+                        .collect(Collectors.toList());
+                break;
+            case "hotel":
+                result = roomList.stream()
+                        .filter(r -> value.equalsIgnoreCase(r.getHotelName()))
+                        .collect(Collectors.toList());
+                break;
+            case "persons":
+                result = roomList.stream()
+                        .filter(r -> Integer.parseInt(value) == r.getPersons())
+                        .collect(Collectors.toList());
+                break;
+            case "city":
+                result = roomList.stream()
+                        .filter(r -> value.equalsIgnoreCase(r.getCityName()))
+                        .collect(Collectors.toList());
+                break;
+            default:
+                System.out.println("Error");
+        }
+
+        return result;
+    }
+
+    public List<Room> findRoom(Map<String, String> params) {
+        List<Room> foundRooms = new ArrayList<>();
 
         for (Map.Entry<String, String> entry : params.entrySet()) {
-            String parametr1 = entry.getKey();
-            String parametr2 = entry.getValue();
-            switch (parametr1) {
-                case "price":
-
-/*                    findRoom.addAll(hotelDAO.getAll().stream()
-                            .filter()
-                            .collect(Collectors.toList()));*/
-                    break;
-                default:
-                    System.out.println("Error");
-            }
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (foundRooms.isEmpty())
+                foundRooms = filterRoomList(roomDAO.getAll(), key, value);
+            else
+                foundRooms = filterRoomList(foundRooms, key, value);
         }
-        return null;
+
+        return foundRooms;
     }
 
     public void registerUser(User user) {

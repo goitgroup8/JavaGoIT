@@ -2,7 +2,12 @@ package bookingsystem;
 
 import bookingsystem.model.Controller;
 
+import bookingsystem.model.Room;
 import bookingsystem.model.User;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
 
@@ -23,6 +28,16 @@ public class Main {
         controller.findHotelByCity("Kiev1").forEach(System.out::println);
         System.out.println();
         controller.findHotelByName("Hotel21").forEach(System.out::println);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("hotel","hotel2");
+        params.put("price","100");
+        List<Room> foundRooms = controller.findRoom(params);
+
+        params.clear();
+        params.put("city","kiev");
+        params.put("price","100");
+        foundRooms = controller.findRoom(params);
 
         controller.bookRoom(1,1,1);
     }
