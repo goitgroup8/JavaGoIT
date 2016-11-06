@@ -124,6 +124,6 @@ public class Controller {
 
     public void registerUser(User user) {
         userDAO.save(user);
-        System.out.println("User " + user.getFirstName() + " " + user.getLastName() + "be registered.");
+        System.out.println("User " + user.getFirstName() + " " + user.getLastName() + " be registered.");
     }
 }
