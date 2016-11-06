@@ -18,7 +18,7 @@ public class Controller {
     static {
         List<Room> roomsHotel1 = new ArrayList<Room>();
         roomsHotel1.add(new Room(1, 100, 4, "Hotel1", "Kiev", null));
-        roomsHotel1.add(new Room(2, 400, 2, "Hotel1", "Kiev", null));
+        roomsHotel1.add(new Room(2, 100, 2, "Hotel1", "Kiev", null));
         roomsHotel1.add(new Room(3, 500, 3, "Hotel1", "Kiev", null));
         hotelDAO.saveHotel(new Hotel(1, "Hotel1", "Kiev", 1, roomsHotel1));
 
@@ -71,7 +71,7 @@ public class Controller {
                     .filter(room -> room.getId() == roomId)
                     .collect(Collectors.toList());
             if (listFoundRooms.size() == 0) {
-                System.out.println("Your search room id - "+ roomId + " -  did not match any rooms");
+                System.out.println("Your search room id - " + roomId + " -  did not match any rooms");
             }
             foundRoom = listFoundRooms.get(0);
             if (foundRoom != null) {
@@ -80,12 +80,12 @@ public class Controller {
                     foundRoom.setUserReserved(foundUser);
                     System.out.println("Booking successful");
                     System.out.println(foundRoom);
-                } else{
-                    System.out.println("Your search user id - "+ userId + " -  did not match any users");
+                } else {
+                    System.out.println("Your search user id - " + userId + " -  did not match any users");
                 }
             }
         } else {
-            System.out.println("Your search hotel id - "+ hotelId + " -  did not match any hotels");
+            System.out.println("Your search hotel id - " + hotelId + " -  did not match any hotels");
         }
     }
 
@@ -97,7 +97,7 @@ public class Controller {
                     .filter(room -> room.getId() == roomId)
                     .collect(Collectors.toList());
             if (listFoundRooms.size() == 0) {
-                System.out.println("Your search room id - "+ roomId + " -  did not match any rooms");
+                System.out.println("Your search room id - " + roomId + " -  did not match any rooms");
             }
             foundRoom = listFoundRooms.get(0);
             if (foundRoom != null) {
@@ -106,12 +106,12 @@ public class Controller {
                     foundRoom.setUserReserved(null);
                     System.out.println("Cancel reservation be successful");
                     System.out.println(foundRoom);
-                } else{
-                    System.out.println("Your search user id - "+ userId + " -  did not match any users");
+                } else {
+                    System.out.println("Your search user id - " + userId + " -  did not match any users");
                 }
             }
         } else {
-            System.out.println("Your search hotel id - "+ hotelId + " -  did not match any hotels");
+            System.out.println("Your search hotel id - " + hotelId + " -  did not match any hotels");
         }
     }
 
@@ -147,12 +147,14 @@ public class Controller {
 
     public List<Room> findRoom(Map<String, String> params) {
         List<Room> foundRooms = new ArrayList<>();
-
+        boolean isFirst = true;
         for (Map.Entry<String, String> entry : params.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            if (foundRooms.isEmpty())
+            if (foundRooms.isEmpty() && isFirst){
                 foundRooms = filterRoomList(roomDAO.getAll(), key, value);
+            isFirst = false;
+        }
             else
                 foundRooms = filterRoomList(foundRooms, key, value);
         }
