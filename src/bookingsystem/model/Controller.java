@@ -62,44 +62,54 @@ public class Controller {
     }
 
     public void bookRoom(long roomId, long userId, long hotelId) {
-        Hotel foundHotel = (Hotel) hotelDAO.findById(hotelId);
+        Hotel foundHotel = hotelDAO.findById(hotelId);
         if (foundHotel != null) {
-            Room foundRoom = null;
+            Room foundRoom;
             List<Room> listFoundRooms = foundHotel.getRooms().stream()
                     .filter(room -> room.getId() == roomId)
                     .collect(Collectors.toList());
             if (listFoundRooms.size() == 0) {
-                System.out.println("Error. With room ID: " + roomId);
-                foundRoom = null;
+                System.out.println("Your search room id - "+ roomId + " -  did not match any rooms");
             }
+            foundRoom = listFoundRooms.get(0);
             if (foundRoom != null) {
-                UserDAO userDB = (UserDAO) userDAO;
-                User foundUser = userDB.findUserById(userId);
+                User foundUser = userDAO.findUserById(userId);
                 if (foundUser != null) {
                     foundRoom.setUserReserved(foundUser);
+                    System.out.println("Booking successful");
+                    System.out.println(foundRoom);
+                } else{
+                    System.out.println("Your search user id - "+ userId + " -  did not match any users");
                 }
             }
+        } else {
+            System.out.println("Your search hotel id - "+ hotelId + " -  did not match any hotels");
         }
     }
 
     public void cancelReservation(long roomId, long userId, long hotelId) {
-        Hotel foundHotel = (Hotel) hotelDAO.findById(hotelId);
+        Hotel foundHotel = hotelDAO.findById(hotelId);
         if (foundHotel != null) {
-            Room foundRoom = null;
+            Room foundRoom;
             List<Room> listFoundRooms = foundHotel.getRooms().stream()
                     .filter(room -> room.getId() == roomId)
                     .collect(Collectors.toList());
             if (listFoundRooms.size() == 0) {
-                System.out.println("Error. With room ID: " + roomId);
-                foundRoom = null;
+                System.out.println("Your search room id - "+ roomId + " -  did not match any rooms");
             }
+            foundRoom = listFoundRooms.get(0);
             if (foundRoom != null) {
-                UserDAO userDB = (UserDAO) userDAO;
-                User foundUser = userDB.findUserById(userId);
+                User foundUser = userDAO.findUserById(userId);
                 if (foundUser != null) {
                     foundRoom.setUserReserved(null);
+                    System.out.println("Cancel reservation be successful");
+                    System.out.println(foundRoom);
+                } else{
+                    System.out.println("Your search user id - "+ userId + " -  did not match any users");
                 }
             }
+        } else {
+            System.out.println("Your search hotel id - "+ hotelId + " -  did not match any hotels");
         }
     }
 

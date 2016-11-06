@@ -99,11 +99,13 @@ public class Room extends BaseEntity{
 
     @Override
     public String toString() {
-        return "Room " +
+        return "Room{" +
                 "id=" + id +
                 ", price=" + price +
                 ", persons=" + persons +
                 ", hotelName='" + hotelName + '\'' +
-                ", cityName='" + cityName + '\'';
+                ", cityName='" + cityName + '\'' +
+                ", userReserved=" + userReserved +
+                '}';
     }
 }
