@@ -1,7 +1,5 @@
 package bookingsystem.model;
 
-import java.util.Date;
-
 public class User extends BaseEntity{
     private long id;
     private String firstName;
@@ -61,6 +59,6 @@ public class User extends BaseEntity{
 
     @Override
     public long getId() {
-        return 0;
+        return id;
     }
 }
