@@ -6,9 +6,9 @@ import bookingsystem.model.Room;
 
 
 public interface RoomDAO {
-    Room saveRoom(Room u);
+    Room saveRoom(Room r);
 
-    void deleteRoom(Room u);
+    void deleteRoom(Room r);
 
     void deleteAllFromList(List<Room> roomList);
 

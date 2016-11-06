@@ -5,13 +5,13 @@ import bookingsystem.model.Hotel;
 import java.util.List;
 
 public interface HotelDAO {
-    Hotel saveHotel(Hotel u);
+    Hotel saveHotel(Hotel h);
 
-    void deleteHotel(Hotel u);
+    void deleteHotel(Hotel h);
 
-    void deleteAllFromList(List<Hotel> roomList);
+    void deleteAllFromList(List<Hotel> hotelList);
 
-    void saveAllFromList(List<Hotel> roomList);
+    void saveAllFromList(List<Hotel> hotelList);
 
     List<Hotel> getAll();
 
