@@ -3,7 +3,6 @@ package bookingsystem.model;
 import bookingsystem.dao.*;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 public class Controller {
 
     private static HotelDAOImpl hotelDAO = new HotelDAOImpl(new RoomDAOImpl());
-    private static AbstractDAO userDAO = new UserDAOImpl();
+    private static UserDAO userDAO = new UserDAOImpl();
     public static CurUser curUser = new CurUser();
 
     static {
@@ -42,6 +41,10 @@ public class Controller {
 
     public List<Hotel> findHotelByName(String name) {
         List result;
+        if (curUser.getCurUser() == null) {
+            System.out.println("User not found");
+            return new ArrayList<>();
+        }
         result = hotelDAO.getAll().stream()
                 .filter(n -> name.equals(n.getName()))
                 .collect(Collectors.toList());
@@ -52,8 +55,7 @@ public class Controller {
 
     public List<Hotel> findHotelByCity(String city) {
         List result;
-        userDAO.getList().forEach(System.out::println);
-        if ((curUser.getCurUser() == null) || (userDAO.getList().contains(curUser.getCurUser()))) {
+        if (curUser.getCurUser() == null) {
             System.out.println("User not found");
             return new ArrayList<>();
         }
@@ -132,7 +134,7 @@ public class Controller {
 
 
     public void registerUser(User user) {
-        userDAO.save(user);
+        userDAO.saveUser(user);
         System.out.println("User " + user.getFirstName() + " " + user.getLastName() + " be registered.");
     }
 }
