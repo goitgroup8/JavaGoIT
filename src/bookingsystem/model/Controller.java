@@ -86,24 +86,21 @@ public class Controller {
 
     public void bookRoom(long roomId, long userId, long hotelId) {
         Hotel foundHotel = hotelDAO.findById(hotelId);
+        User foundUser = userDAO.findUserById(userId);
+        Room foundRoom;
         if (foundHotel != null) {
-            Room foundRoom;
-            List<Room> listFoundRooms = foundHotel.getRooms().stream()
-                    .filter(room -> room.getId() == roomId)
-                    .collect(Collectors.toList());
-            if (listFoundRooms.size() == 0) {
-                System.out.println("Your search room id - " + roomId + " -  did not match any rooms");
-            }
-            foundRoom = listFoundRooms.get(0);
+            foundRoom = foundHotel.getRooms().get((int) roomId);
             if (foundRoom != null) {
-                User foundUser = userDAO.findUserById(userId);
-                if (foundUser != null) {
-                    foundRoom.setUserReserved(foundUser);
-                    System.out.println("Booking successful");
-                    System.out.println(foundRoom);
+                if (foundRoom.getUserReserved() == null) {
+                    if (foundUser != null) {
+                        foundRoom.setUserReserved(foundUser);
+                        System.out.println("Booking successful");
+                    }
                 } else {
-                    System.out.println("Your search user id - " + userId + " -  did not match any users");
+                    System.out.println("Room was booking");
                 }
+            } else {
+                System.out.println("Your search room id - " + roomId + " -  did not match any rooms");
             }
         } else {
             System.out.println("Your search hotel id - " + hotelId + " -  did not match any hotels");
@@ -112,24 +109,21 @@ public class Controller {
 
     public void cancelReservation(long roomId, long userId, long hotelId) {
         Hotel foundHotel = hotelDAO.findById(hotelId);
+        User foundUser = userDAO.findUserById(userId);
+        Room foundRoom;
         if (foundHotel != null) {
-            Room foundRoom;
-            List<Room> listFoundRooms = foundHotel.getRooms().stream()
-                    .filter(room -> room.getId() == roomId)
-                    .collect(Collectors.toList());
-            if (listFoundRooms.size() == 0) {
-                System.out.println("Your search room id - " + roomId + " -  did not match any rooms");
-            }
-            foundRoom = listFoundRooms.get(0);
+            foundRoom = foundHotel.getRooms().get((int) roomId);
             if (foundRoom != null) {
-                User foundUser = userDAO.findUserById(userId);
-                if (foundUser != null) {
-                    foundRoom.setUserReserved(null);
-                    System.out.println("Cancel reservation be successful");
-                    System.out.println(foundRoom);
+                if (foundRoom.getUserReserved() == foundUser) {
+                    if (foundUser != null) {
+                        foundRoom.setUserReserved(null);
+                        System.out.println("Cancel reservation successful");
+                    }
                 } else {
-                    System.out.println("Your search user id - " + userId + " -  did not match any users");
+                    System.out.println("User can't cansel reservation");
                 }
+            } else {
+                System.out.println("Your search room id - " + roomId + " -  did not match any rooms");
             }
         } else {
             System.out.println("Your search hotel id - " + hotelId + " -  did not match any hotels");
