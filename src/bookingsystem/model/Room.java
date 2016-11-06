@@ -8,15 +8,26 @@ public class Room extends BaseEntity{
     private int persons;
     private String hotelName;
     private String cityName;
+    private User userReserved;
 
-    public Room(long id, int price, int persons, String hotelName, String cityName) {
+    public User getUserReserved() {
+        return userReserved;
+    }
+
+    public void setUserReserved(User userReserved) {
+        this.userReserved = userReserved;
+    }
+
+
+    public Room(long id, int price, int persons, String hotelName, String cityName, User userReserved) {
         this.id = id;
         this.price = price;
         this.persons = persons;
-
         this.hotelName = hotelName;
         this.cityName = cityName;
+        this.userReserved = userReserved;
     }
+
     @Override
     public long getId() {
         return id;
