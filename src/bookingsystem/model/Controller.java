@@ -143,11 +143,15 @@ public class Controller {
 
     public void bookRoom(long roomId, long userId, long hotelId) {
         boolean flag = true;
-
+        if (!checkCurrUser()) {
+            flag=false;
+        }
         Hotel hotel = hotelDAO.findHotelById(hotelId);
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
-        flag = checkHotelRoomUserNotNull(roomId, userId, hotelId, flag, hotel, user, room);
+        if (flag) {
+            flag = checkHotelRoomUserNotNull(roomId, userId, hotelId, flag, hotel, user, room);
+        }
         if (flag) {
             if (room.getUserReserved() == null) {
                 room.setUserReserved(user);
@@ -160,11 +164,15 @@ public class Controller {
 
     public void cancelReservation(long roomId, long userId, long hotelId) {
         boolean flag = true;
+        if (!checkCurrUser()) {
+            flag=false;
+        }
         Hotel hotel = hotelDAO.findHotelById(hotelId);
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
-
-        flag = checkHotelRoomUserNotNull(roomId, userId, hotelId, flag, hotel, user, room);
+        if (flag) {
+            flag = checkHotelRoomUserNotNull(roomId, userId, hotelId, flag, hotel, user, room);
+        }
         if (flag) {
             if (room.getUserReserved() != null && userId == user.getId()) {
                 room.setUserReserved(null);
