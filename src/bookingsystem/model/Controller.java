@@ -113,7 +113,7 @@ public class Controller {
     public List<Hotel> findHotelByName(String name) {
 
         if (!checkCurrUser()) {
-            return null;
+            return new ArrayList<>();
         }
 
         List<Hotel> result = hotelDAO.getAll().stream()
@@ -128,7 +128,7 @@ public class Controller {
     public List<Hotel> findHotelByCity(String city) {
 
         if (!checkCurrUser()) {
-            return null;
+            return new ArrayList<>();
         }
 
         List<Hotel> result = hotelDAO.getAll().stream()
@@ -142,15 +142,11 @@ public class Controller {
 
 
     public void bookRoom(long roomId, long userId, long hotelId) {
-        boolean flag = true;
+        boolean flag;
         Hotel hotel = hotelDAO.findHotelById(hotelId);
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
-        if (checkCurrUser()) {
-            flag = checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room);
-        } else {
-            flag = false;
-        }
+        flag = checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room);
         if (flag) {
             if (room.getUserReserved() == null) {
                 room.setUserReserved(user);
@@ -162,15 +158,11 @@ public class Controller {
     }
 
     public void cancelReservation(long roomId, long userId, long hotelId) {
-        boolean flag = true;
+        boolean flag;
         Hotel hotel = hotelDAO.findHotelById(hotelId);
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
-        if (checkCurrUser()) {
-            flag = checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room);
-        }else {
-            flag = false;
-        }
+        flag = checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room);
         if (flag) {
             if (room.getUserReserved() != null && userId == user.getId()) {
                 room.setUserReserved(null);
@@ -233,18 +225,19 @@ public class Controller {
     }
 
     public List<Room> findRoom(Map<String, String> params) {
+        List<Room> foundRooms = new ArrayList<>();
         if (!checkCurrUser()) {
-            return new ArrayList<>();
+            return foundRooms;
         }
 
-        List<Room> foundRooms = new ArrayList<>();
+
         boolean isFirst = true;
         for (Map.Entry<String, String> entry : params.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
             if (key == null || value == null){
                 System.out.println("You entered \"null\" :)");
-                return null;
+                return foundRooms;
             }
             if (isFirst) {
                 foundRooms = filterRoomList(roomDAO.getAll(), key, value);
