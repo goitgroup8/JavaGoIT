@@ -15,7 +15,6 @@ public class Main {
 
         Controller controller = new Controller();
 
-
         User user = new User(1, "Artur", "Kovalchuk");
         User user1 = new User(2, "Oleg", "Green");
         User user2 = new User(3, "Ivan", "Toropov");
