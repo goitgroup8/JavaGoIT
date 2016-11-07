@@ -37,7 +37,19 @@ public class Main {
         params.put("price","100");
         foundRooms = controller.findRoom(params);
 
-
-        controller.bookRoom(1,3,2);
+        System.out.println();
+       controller.bookRoom(1,1,1);
+        System.out.println();
+        controller.bookRoom(2,23,121);
+        System.out.println();
+        controller.bookRoom(1,13,1);
+        System.out.println();
+/*        controller.cancelReservation(1,1,1);
+        System.out.println();
+        controller.cancelReservation(32,1,1);
+        System.out.println();
+        controller.cancelReservation(32,1,23);
+        System.out.println();
+        controller.cancelReservation(1,13,1);*/
     }
 }
