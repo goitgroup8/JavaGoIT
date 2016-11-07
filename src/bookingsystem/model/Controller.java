@@ -98,41 +98,48 @@ public class Controller {
     }
 
     private boolean checkCurrUser() {
-        if ((curUser.getCurUser() == null) || (!userDAO.getAll().contains(curUser.getCurUser()))) {
+        if (curUser.getCurUser() == null || !userDAO.getAll().contains(curUser.getCurUser())) {
             System.out.println("User not found");
             return false;
         }
-
         return true;
     }
 
+    private void checkSizeArray(String city, List<Hotel> result) {
+        if (result.size() == 0)
+            System.out.println("Your search - " + city + " - did not match any hotels.");
+    }
 
     public List<Hotel> findHotelByName(String name) {
-        List<Hotel> result;
+
         if (!checkCurrUser()) {
-            return new ArrayList<>();
+            return null;
         }
 
-        result = hotelDAO.getAll().stream()
+        List<Hotel> result = hotelDAO.getAll().stream()
                 .filter(n -> name.equals(n.getName()))
                 .collect(Collectors.toList());
-        if (result.size() == 0)
-            System.out.println("Your search - " + name + " - did not match any hotels.");
+
+        checkSizeArray(name, result);
+
         return result;
     }
 
     public List<Hotel> findHotelByCity(String city) {
-        List<Hotel> result;
+
         if (!checkCurrUser()) {
-            return new ArrayList<>();
+            return null;
         }
-        result = hotelDAO.getAll().stream()
+
+        List<Hotel> result = hotelDAO.getAll().stream()
                 .filter(n -> city.equals(n.getCity()))
                 .collect(Collectors.toList());
-        if (result.size() == 0)
-            System.out.println("Your search - " + city + " - did not match any hotels.");
+
+        checkSizeArray(city, result);
+
         return result;
     }
+
 
     public void bookRoom(long roomId, long userId, long hotelId) {
         Hotel foundHotel = hotelDAO.findById(hotelId);
@@ -155,6 +162,8 @@ public class Controller {
                 } else {
                     System.out.println("Room was booking");
                 }
+            } else {
+                System.out.println("Your search room id - " + roomId + " -  did not match any rooms");
             }
         } else {
             System.out.println("Your search hotel id - " + hotelId + " -  did not match any hotels");

@@ -25,8 +25,7 @@ public class Main {
 
         controller.curUser.setCurUser(user);
         controller.findHotelByCity("Kiev1").forEach(System.out::println);
-        System.out.println();
-        controller.findHotelByName("Hotel2").forEach(System.out::println);
+        controller.findHotelByName("Hotel26").forEach(System.out::println);
 
         Map<String, String> params = new HashMap<>();
         params.put("hotel","hotel2");
@@ -38,8 +37,7 @@ public class Main {
         params.put("price","100");
         foundRooms = controller.findRoom(params);
 
-        controller.bookRoom(1,1,1);
 
-        controller.bookRoom(1,1,2);
+        controller.bookRoom(1,3,2);
     }
 }
