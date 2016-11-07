@@ -40,5 +40,7 @@ public class Main {
         foundRooms = controller.findRoom(params);
 
         controller.bookRoom(1,1,1);
+
+        controller.bookRoom(1,1,2);
     }
 }

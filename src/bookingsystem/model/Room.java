@@ -7,6 +7,7 @@ public class Room extends BaseEntity{
     private String hotelName;
     private String cityName;
     private User userReserved;
+    private Hotel hotel;
 
     public User getUserReserved() {
         return userReserved;
@@ -72,6 +73,14 @@ public class Room extends BaseEntity{
     public Room setCityName(String cityName) {
         this.cityName = cityName;
         return this;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
 

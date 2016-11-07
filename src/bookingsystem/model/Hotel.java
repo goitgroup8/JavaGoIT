@@ -7,14 +7,12 @@ public class Hotel extends BaseEntity {
     private String name;
     private String city;
     private long rating;
-    private List<Room> rooms;
 
-    public Hotel(long id, String name, String city, long rating, List<Room> rooms) {
+    public Hotel(long id, String name, String city, long rating) {
         this.id = id;
         this.name = name;
         this.city = city;
         this.rating = rating;
-        this.rooms = rooms;
     }
 
     @Override
@@ -59,14 +57,6 @@ public class Hotel extends BaseEntity {
 
     public void setRating(long rating) {
         this.rating = rating;
-    }
-
-    public List<Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
     }
 
     @Override

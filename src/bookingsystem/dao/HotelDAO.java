@@ -1,11 +1,16 @@
 package bookingsystem.dao;
 
-import bookingsystem.model.Hotel;
+import bookingsystem.model.*;
 
 import java.util.List;
 
 public interface HotelDAO {
+
     Hotel saveHotel(Hotel h);
+
+    Hotel saveHotel(Hotel h, List<Room> rooms);
+
+    void saveRooms(Hotel h, List<Room> rooms);
 
     void deleteHotel(Hotel h);
 

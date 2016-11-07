@@ -13,15 +13,21 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> implements HotelDAO {
     }
 
     public Hotel saveHotel(Hotel hotel) {
-        List<Room> rooms = hotel.getRooms();
-        rdao.saveAll(rooms);
         return save(hotel);
     }
 
+    public Hotel saveHotel(Hotel hotel, List<Room> rooms) {
+        saveRooms(hotel, rooms);
+        return save(hotel);
+    }
+
+    public void saveRooms(Hotel hotel, List<Room> rooms) {
+        rooms.forEach(r -> r.setHotel(hotel));
+        rdao.saveAll(rooms);
+    }
+
     public void deleteHotel(Hotel hotel) {
-        List<Room> rooms = hotel.getRooms();
-        rdao.deleteAll(rooms);
-        delete(hotel);
+        deleteHotelById(hotel.getId());
     }
 
     public void deleteAllFromList(List<Hotel> hotelList) {
@@ -39,7 +45,7 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> implements HotelDAO {
     public void deleteHotelById(long id) {
         Hotel h = findHotelById(id);
         if (h != null) {
-            List<Room> rooms = h.getRooms();
+            List<Room> rooms = rdao.getRoomsByHotelId(id);
             rdao.deleteAll(rooms);
             deleteById(id);
         }
