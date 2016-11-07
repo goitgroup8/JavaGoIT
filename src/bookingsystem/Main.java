@@ -27,7 +27,7 @@ public class Main {
         controller.curUser.setCurUser(user);
         controller.findHotelByCity("Kiev1").forEach(System.out::println);
         System.out.println();
-        controller.findHotelByName("Hotel21").forEach(System.out::println);
+        controller.findHotelByName("Hotel2").forEach(System.out::println);
 
         Map<String, String> params = new HashMap<>();
         params.put("hotel","hotel2");
