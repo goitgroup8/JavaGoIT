@@ -105,9 +105,9 @@ public class Controller {
         return true;
     }
 
-    private void checkSizeArray(String city, List<Hotel> result) {
+    private void checkSizeArray(String str, List<Hotel> result) {
         if (result.size() == 0)
-            System.out.println("Your search - " + city + " - did not match any hotels.");
+            System.out.println("Your search - " + str + " - did not match any hotels.");
     }
 
     public List<Hotel> findHotelByName(String name) {
@@ -147,21 +147,7 @@ public class Controller {
         Hotel hotel = hotelDAO.findHotelById(hotelId);
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
-        if (hotel == null) {
-            flag = false;
-            System.out.println("Your search hotel id - " + hotelId + " -  did not match any hotels");
-        } else {
-            if (room == null) {
-                flag = false;
-                System.out.println("Your search room id - " + roomId + " -  did not match any rooms.");
-
-            } else {
-                if (user == null) {
-                    flag = false;
-                    System.out.println("Your search user id - " + userId + " -  did not match any users");
-                }
-            }
-        }
+        flag = checkHotelRoomUserNotNull(roomId, userId, hotelId, flag, hotel, user, room);
         if (flag) {
             if (room.getUserReserved() == null) {
                 room.setUserReserved(user);
@@ -178,6 +164,18 @@ public class Controller {
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
 
+        flag = checkHotelRoomUserNotNull(roomId, userId, hotelId, flag, hotel, user, room);
+        if (flag) {
+            if (room.getUserReserved() != null && userId == user.getId()) {
+                room.setUserReserved(null);
+                System.out.println("Cansel reservation is successful");
+            } else {
+                System.out.println("You cann't cancel room!");
+            }
+        }
+    }
+
+    private boolean checkHotelRoomUserNotNull(long roomId, long userId, long hotelId, boolean flag, Hotel hotel, User user, Room room) {
         if (hotel == null) {
             flag = false;
             System.out.println("Your search hotel id - " + hotelId + " -  did not match any hotels");
@@ -193,14 +191,7 @@ public class Controller {
                 }
             }
         }
-        if (flag) {
-            if (room.getUserReserved() != null && userId == user.getId()) {
-                room.setUserReserved(null);
-                System.out.println("Cansel reservation is successful");
-            } else {
-                System.out.println("You cann't cancel room!");
-            }
-        }
+        return flag;
     }
 
     private List<Room> filterRoomList(List<Room> roomList, String key, String value) {
@@ -244,6 +235,10 @@ public class Controller {
         for (Map.Entry<String, String> entry : params.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
+            if (key == null || value == null){
+                System.out.println("You entered \"null\" :)");
+                return null;
+            }
             if (isFirst) {
                 foundRooms = filterRoomList(roomDAO.getAll(), key, value);
                 isFirst = false;
