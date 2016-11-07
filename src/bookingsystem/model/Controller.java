@@ -30,32 +30,71 @@ public class Controller {
         roomsHotel1.add(new Room(++roomId, 300, 2, "Hotel1", "Kiev", null));
         hotelDAO.saveHotel(new Hotel(1, "Hotel1", "Kiev", 1), roomsHotel1);
 
+        List<Room> roomsHotel2 = new ArrayList<Room>();
+        roomsHotel2.add(new Room(++roomId, 100, 4, "Hotel2", "Kiev", null));
+        roomsHotel2.add(new Room(++roomId, 400, 2, "Hotel2", "Kiev", null));
+        roomsHotel2.add(new Room(++roomId, 700, 3, "Hotel2", "Kiev", null));
+        roomsHotel2.add(new Room(++roomId, 1500, 5, "Hotel2", "Kiev", null));
+        roomsHotel2.add(new Room(++roomId, 500, 3, "Hotel2", "Kiev", null));
+        roomsHotel2.add(new Room(++roomId, 200, 2, "Hotel2", "Kiev", null));
+        roomsHotel2.add(new Room(++roomId, 1500, 5, "Hotel2", "Kiev", null));
+        roomsHotel2.add(new Room(++roomId, 2500, 5, "Hotel2", "Kiev", null));
+        roomsHotel2.add(new Room(++roomId, 300, 1, "Hotel2", "Kiev", null));
+        roomsHotel2.add(new Room(++roomId, 500, 3, "Hotel2", "Kiev", null));
+        hotelDAO.saveHotel(new Hotel(2, "Hotel2", "Kiev", 3), roomsHotel2);
 
-        List<Room> roomsHotel2 = new ArrayList<>();
-        roomsHotel2.add(new Room(++roomId, 100, 4, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(++roomId, 400, 2, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(++roomId, 200, 1, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(++roomId, 1500, 3, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(++roomId, 2500, 2, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(++roomId, 3200, 3, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(++roomId, 4500, 5, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(++roomId, 1500, 4, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(++roomId, 700, 4, "Hotel2", "London", null));
-        roomsHotel2.add(new Room(++roomId, 300, 3, "Hotel2", "London", null));
-        hotelDAO.saveHotel(new Hotel(2, "Hotel2", "London", 13), roomsHotel2);
+        List<Room> roomsHotel3 = new ArrayList<>();
+        roomsHotel3.add(new Room(++roomId, 100, 4, "Hotel3", "London", null));
+        roomsHotel3.add(new Room(++roomId, 400, 2, "Hotel3", "London", null));
+        roomsHotel3.add(new Room(++roomId, 200, 1, "Hotel3", "London", null));
+        roomsHotel3.add(new Room(++roomId, 1500, 3, "Hotel3", "London", null));
+        roomsHotel3.add(new Room(++roomId, 2500, 2, "Hotel3", "London", null));
+        roomsHotel3.add(new Room(++roomId, 3200, 3, "Hotel3", "London", null));
+        roomsHotel3.add(new Room(++roomId, 4500, 5, "Hotel3", "London", null));
+        roomsHotel3.add(new Room(++roomId, 1500, 4, "Hotel3", "London", null));
+        roomsHotel3.add(new Room(++roomId, 700, 4, "Hotel3", "London", null));
+        roomsHotel3.add(new Room(++roomId, 300, 3, "Hotel3", "London", null));
+        hotelDAO.saveHotel(new Hotel(3, "Hotel3", "London", 13), roomsHotel3);
 
-        List<Room> roomsHotel3 = new ArrayList<Room>();
-        roomsHotel3.add(new Room(++roomId, 100, 4, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(++roomId, 400, 2, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(++roomId, 700, 3, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(++roomId, 1500, 5, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(++roomId, 500, 3, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(++roomId, 200, 2, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(++roomId, 1500, 5, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(++roomId, 2500, 5, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(++roomId, 300, 1, "Hotel3", "Kiev", null));
-        roomsHotel3.add(new Room(++roomId, 500, 3, "Hotel3", "Kiev", null));
-        hotelDAO.saveHotel(new Hotel(3, "Hotel3", "Kiev", 13), roomsHotel3);
+        List<Room> roomsHotel4 = new ArrayList<Room>();
+        roomsHotel4.add(new Room(++roomId, 600, 3, "Hotel4", "London", null));
+        roomsHotel4.add(new Room(++roomId, 400, 1, "Hotel4", "London", null));
+        roomsHotel4.add(new Room(++roomId, 800, 2, "Hotel4", "London", null));
+        roomsHotel4.add(new Room(++roomId, 1600, 4, "Hotel4", "London", null));
+        roomsHotel4.add(new Room(++roomId, 600, 2, "Hotel4", "London", null));
+        roomsHotel4.add(new Room(++roomId, 1000, 2, "Hotel4", "London", null));
+        roomsHotel4.add(new Room(++roomId, 2000, 5, "Hotel4", "London", null));
+        roomsHotel4.add(new Room(++roomId, 4000, 2, "Hotel4", "London", null));
+        roomsHotel4.add(new Room(++roomId, 200, 1, "Hotel4", "London", null));
+        roomsHotel4.add(new Room(++roomId, 700, 3, "Hotel4", "London", null));
+        hotelDAO.saveHotel(new Hotel(4, "Hotel4", "London", 5), roomsHotel4);
+
+        List<Room> roomsHotel5 = new ArrayList<Room>();
+        roomsHotel5.add(new Room(++roomId, 300, 2, "Hotel5", "Amsterdam", null));
+        roomsHotel5.add(new Room(++roomId, 200, 1, "Hotel5", "Amsterdam", null));
+        roomsHotel5.add(new Room(++roomId, 400, 2, "Hotel5", "Amsterdam", null));
+        roomsHotel5.add(new Room(++roomId, 600, 3, "Hotel5", "Amsterdam", null));
+        roomsHotel5.add(new Room(++roomId, 800, 2, "Hotel5", "Amsterdam", null));
+        roomsHotel5.add(new Room(++roomId, 1000, 4, "Hotel5", "Amsterdam", null));
+        roomsHotel5.add(new Room(++roomId, 800, 4, "Hotel5", "Amsterdam", null));
+        roomsHotel5.add(new Room(++roomId, 900, 3, "Hotel5", "Amsterdam", null));
+        roomsHotel5.add(new Room(++roomId, 200, 1, "Hotel5", "Amsterdam", null));
+        roomsHotel5.add(new Room(++roomId, 600, 3, "Hotel5", "Amsterdam", null));
+        hotelDAO.saveHotel(new Hotel(5, "Hotel5", "Amsterdam", 3), roomsHotel5);
+
+        List<Room> roomsHotel6 = new ArrayList<Room>();
+        roomsHotel6.add(new Room(++roomId, 300, 3, "Hotel6", "Amsterdam", null));
+        roomsHotel6.add(new Room(++roomId, 1000, 4, "Hotel6", "Amsterdam", null));
+        roomsHotel6.add(new Room(++roomId, 800, 2, "Hotel6", "Amsterdam", null));
+        roomsHotel6.add(new Room(++roomId, 900, 3, "Hotel6", "Amsterdam", null));
+        roomsHotel6.add(new Room(++roomId, 400, 1, "Hotel6", "Amsterdam", null));
+        roomsHotel6.add(new Room(++roomId, 1500, 5, "Hotel6", "Amsterdam", null));
+        roomsHotel6.add(new Room(++roomId, 700, 3, "Hotel6", "Amsterdam", null));
+        roomsHotel6.add(new Room(++roomId, 900, 3, "Hotel6", "Amsterdam", null));
+        roomsHotel6.add(new Room(++roomId, 800, 2, "Hotel6", "Amsterdam", null));
+        roomsHotel6.add(new Room(++roomId, 600, 2, "Hotel6", "Amsterdam", null));
+        hotelDAO.saveHotel(new Hotel(6, "Hotel6", "Amsterdam", 4), roomsHotel6);
+
     }
 
     private boolean checkCurrUser() {
