@@ -143,14 +143,13 @@ public class Controller {
 
     public void bookRoom(long roomId, long userId, long hotelId) {
         boolean flag = true;
-        if (!checkCurrUser()) {
-            flag=false;
-        }
         Hotel hotel = hotelDAO.findHotelById(hotelId);
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
-        if (flag) {
-            flag = checkHotelRoomUserNotNull(roomId, userId, hotelId, flag, hotel, user, room);
+        if (checkCurrUser()) {
+            flag = checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room);
+        } else {
+            flag = false;
         }
         if (flag) {
             if (room.getUserReserved() == null) {
@@ -164,14 +163,13 @@ public class Controller {
 
     public void cancelReservation(long roomId, long userId, long hotelId) {
         boolean flag = true;
-        if (!checkCurrUser()) {
-            flag=false;
-        }
         Hotel hotel = hotelDAO.findHotelById(hotelId);
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
-        if (flag) {
-            flag = checkHotelRoomUserNotNull(roomId, userId, hotelId, flag, hotel, user, room);
+        if (checkCurrUser()) {
+            flag = checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room);
+        }else {
+            flag = false;
         }
         if (flag) {
             if (room.getUserReserved() != null && userId == user.getId()) {
@@ -183,7 +181,8 @@ public class Controller {
         }
     }
 
-    private boolean checkHotelRoomUserNotNull(long roomId, long userId, long hotelId, boolean flag, Hotel hotel, User user, Room room) {
+    private boolean checkHotelRoomUserNotNull(long roomId, long userId, long hotelId, Hotel hotel, User user, Room room) {
+        boolean flag = true;
         if (hotel == null) {
             flag = false;
             System.out.println("Your search hotel id - " + hotelId + " -  did not match any hotels");
