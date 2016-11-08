@@ -32,7 +32,7 @@ public class Main {
         System.out.println("\nTry find hotels by city without user authorization");
         controller.findHotelByCity("Kiev").forEach(System.out::println);
 
-        System.out.println("\nUser authorization - user5 - User not registrate ");
+        System.out.println("\nUser authorization - user5 - User not registrate");
         Controller.curUser.setCurUser(user5);
 
         System.out.println("\nUser authorization");
