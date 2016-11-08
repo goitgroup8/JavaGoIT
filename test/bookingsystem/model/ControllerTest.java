@@ -64,7 +64,6 @@ public class ControllerTest {
 
     @Test
     public void bookRoom() throws Exception {
-     controller.bookRoom(1,1,1);
 
     }
 
