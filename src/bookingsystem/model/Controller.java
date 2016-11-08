@@ -115,7 +115,6 @@ public class Controller {
             return new ArrayList<>();
         }
 
-
         if (!checkCurrUser()) {
             return new ArrayList<>();
         }
@@ -149,12 +148,10 @@ public class Controller {
 
 
     public void bookRoom(long roomId, long userId, long hotelId) {
-        boolean flag;
         Hotel hotel = hotelDAO.findHotelById(hotelId);
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
-        flag = checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room);
-        if (flag) {
+        if ( checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room)) {
             if (room.getUserReserved() == null) {
                 room.setUserReserved(user);
                 System.out.println("Successful");
@@ -165,13 +162,11 @@ public class Controller {
     }
 
     public void cancelReservation(long roomId, long userId, long hotelId) {
-        boolean flag;
         Hotel hotel = hotelDAO.findHotelById(hotelId);
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
-        flag = checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room);
-        if (flag) {
-            if (room.getUserReserved() != null && userId == user.getId()) {
+        if (checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room)) {
+            if (room.getUserReserved() != null && userId == room.getUserReserved().getId()) {
                 room.setUserReserved(null);
                 System.out.println("Cansel reservation is successful");
             } else {
@@ -236,13 +231,16 @@ public class Controller {
         if (!checkCurrUser()) {
             return foundRooms;
         }
-
+        if (params == null){
+            System.out.println("You entered \"null\" :)");
+            return foundRooms;
+        }
 
         boolean isFirst = true;
         for (Map.Entry<String, String> entry : params.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            if (key == null || value == null) {
+            if (key == null || value == null && !params.isEmpty()) {
                 System.out.println("You entered \"null\" :)");
                 return foundRooms;
             }
