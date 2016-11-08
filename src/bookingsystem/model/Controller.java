@@ -152,7 +152,7 @@ public class Controller {
         if (checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room)) {
             if (room.getUserReserved() == null) {
                 room.setUserReserved(user);
-                System.out.println(String.format("The room with id = %d in hotel %1s in %2s city was reserved for user %3s %4s Successfuly.", roomId, hotel.getName(), hotel.getCity(), user.getFirstName(), user.getLastName()));
+                System.out.println(String.format("The room with id = %d in hotel %1s in %2s city was reserved for user %3s %4s. Successfuly.", roomId, hotel.getName(), hotel.getCity(), user.getFirstName(), user.getLastName()));
             } else {
                 System.out.println(String.format("The room with id = %d in hotel %1s in %2s city has been booked already.", roomId, hotel.getName(), hotel.getCity()));
             }
@@ -177,7 +177,7 @@ public class Controller {
         boolean flag = true;
         if (hotel == null) {
             flag = false;
-            System.out.println("Your search hotel id - " + hotelId + " -  did not match any hotels");
+            System.out.println("Your search hotel id - " + hotelId + " -  did not match any hotels.");
         } else {
             if (room == null) {
                 flag = false;
@@ -186,7 +186,7 @@ public class Controller {
             } else {
                 if (user == null) {
                     flag = false;
-                    System.out.println("Your search user id - " + userId + " -  did not match any users");
+                    System.out.println("Your search user id - " + userId + " -  did not match any users.");
                 }
             }
         }

@@ -100,7 +100,7 @@ public class Main {
         System.out.println("\nRequest #2 - roomId = 1, userId = 2, hotelId = 1");
         controller.bookRoom(1, 2, 1);
         System.out.println("\nRequest #3 - roomId = 13, userId = 3, hotelId = 2");
-        controller.bookRoom(3, 3, 1);
+        controller.bookRoom(13, 3, 2);
         System.out.println("\nRequest #4 - roomId = 13, userId = 3, hotelId = 25");
         controller.bookRoom(13, 3, 25);
         System.out.println("\nRequest #5 - roomId = 25, userId = 25, hotelId = 25");
