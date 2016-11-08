@@ -111,6 +111,11 @@ public class Controller {
     }
 
     public List<Hotel> findHotelByName(String name) {
+        if (name == null) {
+            System.out.println("You entered \"null\" :)");
+            return new ArrayList<>();
+        }
+
 
         if (!checkCurrUser()) {
             return new ArrayList<>();
@@ -126,7 +131,10 @@ public class Controller {
     }
 
     public List<Hotel> findHotelByCity(String city) {
-
+        if (city == null) {
+            System.out.println("You entered \"null\" :)");
+            return new ArrayList<>();
+        }
         if (!checkCurrUser()) {
             return new ArrayList<>();
         }
@@ -235,7 +243,7 @@ public class Controller {
         for (Map.Entry<String, String> entry : params.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            if (key == null || value == null){
+            if (key == null || value == null) {
                 System.out.println("You entered \"null\" :)");
                 return foundRooms;
             }
