@@ -157,9 +157,9 @@ public class Controller {
         if (flag) {
             if (room.getUserReserved() == null) {
                 room.setUserReserved(user);
-                System.out.println("Successful");
+                System.out.println(String.format("The room with id = %d in hotel %1s in %2s city was reserved for user %3s %4s Successfuly.", roomId, hotel.getName(), hotel.getCity(), user.getFirstName(), user.getLastName()));
             } else {
-                System.out.println("Room was booking");
+                System.out.println(String.format("The room with id = %d in hotel %1s in %2s city has been booked already.", roomId, hotel.getName(), hotel.getCity()));
             }
         }
     }
@@ -173,9 +173,9 @@ public class Controller {
         if (flag) {
             if (room.getUserReserved() != null && userId == user.getId()) {
                 room.setUserReserved(null);
-                System.out.println("Cansel reservation is successful");
+                System.out.println(String.format("A reservation of the room with id = %d in hotel %1s in %2s city has been canceled.", roomId, hotel.getName(), hotel.getCity()));
             } else {
-                System.out.println("You cann't cancel room!");
+                System.out.println(String.format("The room with id = %d in hotel %1s in %2s city is free. You can't cancel reservation.", roomId, hotel.getName(), hotel.getCity()));
             }
         }
     }
