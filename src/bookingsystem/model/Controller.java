@@ -7,12 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
 public class Controller {
 
     private static RoomDAOImpl roomDAO = new RoomDAOImpl();
     private static HotelDAOImpl hotelDAO = new HotelDAOImpl(roomDAO);
-    private static UserDAOImpl userDAO = new UserDAOImpl();
+    static UserDAOImpl userDAO = new UserDAOImpl();
     public static CurUser curUser = new CurUser();
 
     static {
@@ -93,7 +92,7 @@ public class Controller {
         roomsHotel6.add(new Room(++roomId, 900, 3, null));
         roomsHotel6.add(new Room(++roomId, 800, 2, null));
         roomsHotel6.add(new Room(++roomId, 600, 2, null));
-        hotelDAO.saveHotel(new Hotel(6, "Hotel6", "Amsterdam",4),roomsHotel6);
+        hotelDAO.saveHotel(new Hotel(6, "Hotel6", "Amsterdam", 4), roomsHotel6);
     }
 
     private boolean checkCurrUser() {
@@ -114,7 +113,6 @@ public class Controller {
             System.out.println("You entered \"null\" :)");
             return new ArrayList<>();
         }
-
 
         if (!checkCurrUser()) {
             return new ArrayList<>();
@@ -147,14 +145,11 @@ public class Controller {
         return result;
     }
 
-
     public void bookRoom(long roomId, long userId, long hotelId) {
-        boolean flag;
         Hotel hotel = hotelDAO.findHotelById(hotelId);
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
-        flag = checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room);
-        if (flag) {
+        if (checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room)) {
             if (room.getUserReserved() == null) {
                 room.setUserReserved(user);
                 System.out.println(String.format("The room with id = %d in hotel %1s in %2s city was reserved for user %3s %4s Successfuly.", roomId, hotel.getName(), hotel.getCity(), user.getFirstName(), user.getLastName()));
@@ -165,13 +160,11 @@ public class Controller {
     }
 
     public void cancelReservation(long roomId, long userId, long hotelId) {
-        boolean flag;
         Hotel hotel = hotelDAO.findHotelById(hotelId);
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
-        flag = checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room);
-        if (flag) {
-            if (room.getUserReserved() != null && userId == user.getId()) {
+        if (checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room)) {
+            if (room.getUserReserved() != null && userId == room.getUserReserved().getId()) {
                 room.setUserReserved(null);
                 System.out.println(String.format("A reservation of the room with id = %d in hotel %1s in %2s city has been canceled.", roomId, hotel.getName(), hotel.getCity()));
             } else {
@@ -236,13 +229,16 @@ public class Controller {
         if (!checkCurrUser()) {
             return foundRooms;
         }
-
+        if (params == null) {
+            System.out.println("You entered \"null\" :)");
+            return foundRooms;
+        }
 
         boolean isFirst = true;
         for (Map.Entry<String, String> entry : params.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            if (key == null || value == null) {
+            if (key == null || value == null && !params.isEmpty()) {
                 System.out.println("You entered \"null\" :)");
                 return foundRooms;
             }
