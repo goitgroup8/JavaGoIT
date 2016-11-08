@@ -4,16 +4,13 @@ import bookingsystem.model.Hotel;
 import bookingsystem.model.Room;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HotelDAOImpl extends AbstractDAOImpl<Hotel> implements HotelDAO {
     private RoomDAOImpl rdao;
 
     public HotelDAOImpl(RoomDAOImpl rdao) {
         this.rdao = rdao;
-    }
-
-    public Hotel saveHotel(Hotel hotel) {
-        return save(hotel);
     }
 
     public Hotel saveHotel(Hotel hotel, List<Room> rooms) {
@@ -34,16 +31,8 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> implements HotelDAO {
         hotelList.forEach(h -> deleteHotel(h));
     }
 
-    public void saveAllFromList(List<Hotel> hotelList) {
-        hotelList.forEach(h -> saveHotel(h));
-    }
-
-    public List<Hotel> getAll() {
-        return getList();
-    }
-
     public void deleteHotelById(long id) {
-        Hotel h = findHotelById(id);
+        Hotel h = findById(id);
         if (h != null) {
             List<Room> rooms = rdao.getRoomsByHotelId(id);
             rdao.deleteAll(rooms);
@@ -51,7 +40,15 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> implements HotelDAO {
         }
     }
 
-    public Hotel findHotelById(long id) {
-        return findById(id);
+    public List<Hotel> findHotelByName(String name) {
+        return getAll().stream()
+                .filter(n -> name.equals(n.getName()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Hotel> findHotelByCity(String city) {
+        return getAll().stream()
+                .filter(n -> city.equals(n.getCity()))
+                .collect(Collectors.toList());
     }
 }

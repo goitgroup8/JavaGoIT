@@ -146,8 +146,8 @@ public class Controller {
     }
 
     public void bookRoom(long roomId, long userId, long hotelId) {
-        Hotel hotel = hotelDAO.findHotelById(hotelId);
-        User user = userDAO.findUserById(userId);
+        Hotel hotel = hotelDAO.findById(hotelId);
+        User user = userDAO.findById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
         if (checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room)) {
             if (room.getUserReserved() == null) {
@@ -160,8 +160,8 @@ public class Controller {
     }
 
     public void cancelReservation(long roomId, long userId, long hotelId) {
-        Hotel hotel = hotelDAO.findHotelById(hotelId);
-        User user = userDAO.findUserById(userId);
+        Hotel hotel = hotelDAO.findById(hotelId);
+        User user = userDAO.findById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
         if (checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room)) {
             if (room.getUserReserved() != null && userId == room.getUserReserved().getId()) {
@@ -253,7 +253,7 @@ public class Controller {
     }
 
     public void registerUser(User user) {
-        userDAO.saveUser(user);
+        userDAO.save(user);
         System.out.println("User " + user.getFirstName() + " " + user.getLastName() + " be registered.");
     }
 }

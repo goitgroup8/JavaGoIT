@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface HotelDAO {
 
-    Hotel saveHotel(Hotel h);
-
     Hotel saveHotel(Hotel h, List<Room> rooms);
 
     void saveRooms(Hotel h, List<Room> rooms);
@@ -16,11 +14,9 @@ public interface HotelDAO {
 
     void deleteAllFromList(List<Hotel> hotelList);
 
-    void saveAllFromList(List<Hotel> hotelList);
-
-    List<Hotel> getAll();
-
     void deleteHotelById(long id);
 
-    Hotel findHotelById(long id);
+    List<Hotel> findHotelByName(String name);
+
+    List<Hotel> findHotelByCity(String city);
 }
