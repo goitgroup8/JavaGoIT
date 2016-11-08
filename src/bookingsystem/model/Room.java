@@ -4,26 +4,22 @@ public class Room extends BaseEntity{
     private long id;
     private int price;
     private int persons;
-    private String hotelName;
-    private String cityName;
     private User userReserved;
     private Hotel hotel;
 
-    public User getUserReserved() {
+    User getUserReserved() {
         return userReserved;
     }
 
-    public void setUserReserved(User userReserved) {
+     void setUserReserved(User userReserved) {
         this.userReserved = userReserved;
     }
 
 
-    public Room(long id, int price, int persons, String hotelName, String cityName, User userReserved) {
+     Room(long id, int price, int persons, User userReserved) {
         this.id = id;
         this.price = price;
         this.persons = persons;
-        this.hotelName = hotelName;
-        this.cityName = cityName;
         this.userReserved = userReserved;
     }
 
@@ -32,21 +28,21 @@ public class Room extends BaseEntity{
         return id;
     }
 
-    public int getPrice() {
+     int getPrice() {
         return price;
     }
 
-    public int getPersons() {
+     int getPersons() {
         return persons;
     }
 
 
     public String getHotelName() {
-        return hotelName;
+        return hotel.getName();
     }
 
     public String getCityName() {
-        return cityName;
+        return hotel.getCity();
     }
 
     public Room setId(long id) {
@@ -65,15 +61,7 @@ public class Room extends BaseEntity{
     }
 
 
-    public Room setHotelName(String hotelName) {
-        this.hotelName = hotelName;
-        return this;
-    }
 
-    public Room setCityName(String cityName) {
-        this.cityName = cityName;
-        return this;
-    }
 
     public Hotel getHotel() {
         return hotel;
@@ -101,8 +89,8 @@ public class Room extends BaseEntity{
         result = 31 * result + price;
         result = 31 * result + persons;
 
-        result = 31 * result + hotelName.hashCode();
-        result = 31 * result + cityName.hashCode();
+        result = 31 * result + hotel.getName().hashCode();
+        result = 31 * result + hotel.getCity().hashCode();
         return result;
     }
 
@@ -112,8 +100,8 @@ public class Room extends BaseEntity{
                 "id=" + id +
                 ", price=" + price +
                 ", persons=" + persons +
-                ", hotelName='" + hotelName + '\'' +
-                ", cityName='" + cityName + '\'' +
+                ", hotelName='" + hotel.getName() + '\'' +
+                ", cityName='" + hotel.getCity() + '\'' +
                 ", userReserved=" + userReserved +
                 '}';
     }
