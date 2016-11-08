@@ -7,12 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
 public class Controller {
 
     private static RoomDAOImpl roomDAO = new RoomDAOImpl();
     private static HotelDAOImpl hotelDAO = new HotelDAOImpl(roomDAO);
-    private static UserDAOImpl userDAO = new UserDAOImpl();
+    static UserDAOImpl userDAO = new UserDAOImpl();
     public static CurUser curUser = new CurUser();
 
     static {
@@ -93,7 +92,7 @@ public class Controller {
         roomsHotel6.add(new Room(++roomId, 900, 3, null));
         roomsHotel6.add(new Room(++roomId, 800, 2, null));
         roomsHotel6.add(new Room(++roomId, 600, 2, null));
-        hotelDAO.saveHotel(new Hotel(6, "Hotel6", "Amsterdam",4),roomsHotel6);
+        hotelDAO.saveHotel(new Hotel(6, "Hotel6", "Amsterdam", 4), roomsHotel6);
     }
 
     private boolean checkCurrUser() {
@@ -146,12 +145,11 @@ public class Controller {
         return result;
     }
 
-
     public void bookRoom(long roomId, long userId, long hotelId) {
         Hotel hotel = hotelDAO.findHotelById(hotelId);
         User user = userDAO.findUserById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
-        if ( checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room)) {
+        if (checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room)) {
             if (room.getUserReserved() == null) {
                 room.setUserReserved(user);
                 System.out.println("Successful");
@@ -231,7 +229,7 @@ public class Controller {
         if (!checkCurrUser()) {
             return foundRooms;
         }
-        if (params == null){
+        if (params == null) {
             System.out.println("You entered \"null\" :)");
             return foundRooms;
         }

@@ -6,7 +6,6 @@ import bookingsystem.model.Room;
 import bookingsystem.model.User;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +32,9 @@ public class Main {
         System.out.println("\nTry find hotels by city without user authorization");
         controller.findHotelByCity("Kiev").forEach(System.out::println);
 
+        System.out.println("\nUser authorization - user5 - User not registrate ");
+        Controller.curUser.setCurUser(user5);
+
         System.out.println("\nUser authorization");
         Controller.curUser.setCurUser(user1);
 
@@ -50,7 +52,7 @@ public class Main {
         controller.findHotelByName(null).forEach(System.out::println);
 
         List<Room> foundRooms;
-        Map<String, String> params = new LinkedHashMap<>();
+        Map<String, String> params = new HashMap<>();
         System.out.println("\nFind rooms by parameters with user authorization.\nRequest #1 - hotel = hotel1, price = 100");
         params.put("hotel", "hotel1");
         params.put("price", "100");
