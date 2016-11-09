@@ -160,11 +160,14 @@ public class Controller {
         User user = userDAO.findById(userId);
         Room room = roomDAO.findRoomByIdWithHotelCheck(hotelId, roomId);
         if (checkCurrUser() && checkHotelRoomUserNotNull(roomId, userId, hotelId, hotel, user, room)) {
-            if (room.getUserReserved() != null && userId == room.getUserReserved().getId()) {
+            if (room.getUserReserved() == null)
+                System.out.println(String.format("The room with id = %d in hotel %1s in %2s city is free. You can't cancel reservation.", roomId, hotel.getName(), hotel.getCity()));
+            else
+            if (userId != room.getUserReserved().getId()) {
+                System.out.println(String.format("The room with id = %d in hotel %1s in %2s city is reserverd by another user. You can't cancel reservation.", roomId, hotel.getName(), hotel.getCity()));
+            } else {
                 room.setUserReserved(null);
                 System.out.println(String.format("A reservation of the room with id = %d in hotel %1s in %2s city has been canceled.", roomId, hotel.getName(), hotel.getCity()));
-            } else {
-                System.out.println(String.format("The room with id = %d in hotel %1s in %2s city is free. You can't cancel reservation.", roomId, hotel.getName(), hotel.getCity()));
             }
         }
     }
