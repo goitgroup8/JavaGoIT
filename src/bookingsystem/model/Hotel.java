@@ -3,37 +3,17 @@ package bookingsystem.model;
 import java.util.List;
 
 public class Hotel extends BaseEntity {
-    private long id;
+
     private String name;
     private String city;
     private long rating;
     private List<Room> rooms;
 
     public Hotel(long id, String name, String city, long rating) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.city = city;
         this.rating = rating;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Hotel)) return false;
-
-        Hotel hotel = (Hotel) o;
-
-        return id == hotel.id;
-
-    }
-
-    @Override
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -71,16 +51,10 @@ public class Hotel extends BaseEntity {
     @Override
     public String toString() {
         return "Hotel{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +
                 ", rating=" + rating +
-                ", rooms=" + rooms +
                 '}';
-    }
-
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
     }
 }
