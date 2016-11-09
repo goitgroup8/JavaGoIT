@@ -16,10 +16,12 @@ public class AbstractDAOImpl<T extends BaseEntity> implements AbstractDAO<T> {
 
     @Override
     public T save(T o) {
-        if (!objectList.contains(o))
+        if (!objectList.contains(o)) {
             objectList.add(o);
-        else
-            objectList.set(objectList.indexOf(o),o);
+        }
+        else {
+            objectList.set(objectList.indexOf(o), o);
+        }
 
         return o;
     }
@@ -49,15 +51,11 @@ public class AbstractDAOImpl<T extends BaseEntity> implements AbstractDAO<T> {
         Optional<T> res = objectList.stream()
                 .filter(o -> o.getId() == id)
                 .findFirst();
-        if (res.isPresent()) {
-            return res.get();
-        }
-        else
-            return null;
+        return res.orElse(null);
     }
 
     @Override
-    public List<T> getList() {
+    public List<T> getAll() {
         return objectList;
     }
 
