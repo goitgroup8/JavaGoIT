@@ -118,9 +118,7 @@ public class Controller {
             return new ArrayList<>();
         }
 
-        List<Hotel> result = hotelDAO.getAll().stream()
-                .filter(n -> name.equals(n.getName()))
-                .collect(Collectors.toList());
+        List<Hotel> result = hotelDAO.findHotelByName(name);
 
         checkSizeArray(name, result);
 
@@ -136,9 +134,7 @@ public class Controller {
             return new ArrayList<>();
         }
 
-        List<Hotel> result = hotelDAO.getAll().stream()
-                .filter(n -> city.equals(n.getCity()))
-                .collect(Collectors.toList());
+        List<Hotel> result = hotelDAO.findHotelByCity(city);
 
         checkSizeArray(city, result);
 

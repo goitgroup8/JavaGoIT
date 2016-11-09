@@ -7,6 +7,7 @@ public class Hotel extends BaseEntity {
     private String name;
     private String city;
     private long rating;
+    private List<Room> rooms;
 
     public Hotel(long id, String name, String city, long rating) {
         this.id = id;
@@ -59,6 +60,14 @@ public class Hotel extends BaseEntity {
         this.rating = rating;
     }
 
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
     @Override
     public String toString() {
         return "Hotel{" +
@@ -66,7 +75,7 @@ public class Hotel extends BaseEntity {
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +
                 ", rating=" + rating +
-       //         ", rooms=" + rooms +
+                ", rooms=" + rooms +
                 '}';
     }
 

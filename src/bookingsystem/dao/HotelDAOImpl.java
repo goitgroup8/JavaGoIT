@@ -23,6 +23,27 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> implements HotelDAO {
         rdao.saveAll(rooms);
     }
 
+    public List<Room> getRooms(Hotel hotel) {
+        return rdao.getRoomsByHotelId(hotel.getId());
+    }
+
+    public Hotel findHotelById(long id) {
+        Hotel h = findById(id);
+        List<Room> rooms = rdao.getRoomsByHotelId(h.getId());
+        h.setRooms(rooms);
+        return h;
+    }
+
+    public List<Hotel> getAllHotels() {
+        List<Hotel> hotels = getAll();
+        hotels.forEach(h -> {
+            List<Room> rooms = rdao.getRoomsByHotelId(h.getId());
+            h.setRooms(rooms);
+        });
+
+        return hotels;
+    }
+
     public void deleteHotel(Hotel hotel) {
         deleteHotelById(hotel.getId());
     }
@@ -41,14 +62,26 @@ public class HotelDAOImpl extends AbstractDAOImpl<Hotel> implements HotelDAO {
     }
 
     public List<Hotel> findHotelByName(String name) {
-        return getAll().stream()
+        List<Hotel> hotels = getAll().stream()
                 .filter(n -> name.equals(n.getName()))
                 .collect(Collectors.toList());
+        hotels.forEach(h -> {
+            List<Room> rooms = rdao.getRoomsByHotelId(h.getId());
+            h.setRooms(rooms);
+        });
+
+        return hotels;
     }
 
     public List<Hotel> findHotelByCity(String city) {
-        return getAll().stream()
+        List<Hotel> hotels = getAll().stream()
                 .filter(n -> city.equals(n.getCity()))
                 .collect(Collectors.toList());
+        hotels.forEach(h -> {
+            List<Room> rooms = rdao.getRoomsByHotelId(h.getId());
+            h.setRooms(rooms);
+        });
+
+        return hotels;
     }
 }
